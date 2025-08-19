@@ -70,6 +70,24 @@ namespace auxtypes
         const char& operator[](std::size_t i) const;
         bool operator==(const char*) const;
     };
+
+    /**
+     * Lightweight map on stack for little pair sets.
+     * It's good for configurations, enums and lookup tables.
+     */
+    template <typename K, typename V, std::size_t N>
+    class StaticMap
+    {
+        std::array<std::pair<K, V>, N> storage {};
+        std::size_t count = 0;
+
+    public:
+        void insert(const K& key, const V& value);
+        void remove(const K& key);
+        V& at(const K& key);
+        const V& at(const K& key) const;
+        std::size_t size() const; 
+    };
 }
 
 #endif /* F44E96E9_F6ED_4101_8E04_042D0B88081B */

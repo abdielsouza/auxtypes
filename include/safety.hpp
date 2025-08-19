@@ -32,6 +32,47 @@ namespace auxtypes
         T operator->() const { return ptr; }
         decltype(auto) operator*() const { return *ptr; }
     };
+
+    /**
+     * Assert the types who implements it cannot be copyable.
+     */
+    class NonCopyable
+    {
+    public:
+        NonCopyable() = default;
+        ~NonCopyable() = default;
+
+        NonCopyable(const NonCopyable&) = delete;
+        NonCopyable& operator=(const NonCopyable&) = delete;
+    };
+
+    /**
+     * Assert the types who implements it cannot be movable.
+     */
+    class NonMovable
+    {
+    public:
+        NonMovable() = default;
+        ~NonMovable() = default;
+
+        NonMovable(NonMovable&&) = delete;
+        NonMovable&& operator=(NonMovable&&) = delete;
+    };
+
+    /**
+     * Assert the types who implements it cannot be neither copyable or movable.
+     */
+    class NeitherCopyableOrMovable
+    {
+        NeitherCopyableOrMovable() = default;
+        ~NeitherCopyableOrMovable() = default;
+
+        NeitherCopyableOrMovable(const NeitherCopyableOrMovable&) = delete;
+        NeitherCopyableOrMovable& operator=(const NeitherCopyableOrMovable&) = delete;
+
+        NeitherCopyableOrMovable(NeitherCopyableOrMovable&&) = delete;
+        NeitherCopyableOrMovable&& operator=(NeitherCopyableOrMovable&&) = delete;
+    };
 }
 
 #endif /* C4938C27_6ADA_4693_A8AD_9BF179FB69AE */
