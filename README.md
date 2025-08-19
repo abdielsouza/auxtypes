@@ -17,7 +17,9 @@ Ela busca oferecer **segurança, clareza e performance**, complementando a STL c
 ### 🔹 Containers auxiliares
 - `SmallVector<T, N>` – vetor com buffer interno otimizado (stack + heap sob demanda)  
 - `FixedString<N>` – string de tamanho fixo, segura e rápida  
-- `StaticMap<K, V, N>` – mapa leve em stack para pequenos conjuntos de pares  
+- `StaticMap<K, V, N>` – mapa leve em stack para pequenos conjuntos de pares
+
+**mais recursos em breve...**
 
 ---
 
