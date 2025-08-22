@@ -1,10 +1,29 @@
 add_rules("mode.debug", "mode.release")
 
 target("auxtypes")
-    set_kind("shared")
+    set_kind("headeronly")
     set_languages("c99", "cxx17")
-    add_files("src/*.c", "src/*.cpp")
-    add_includedirs("include")
+    add_includedirs("include", {public=true})
+
+target("test_metautils")
+    set_kind("binary")
+    add_deps("auxtypes")
+    add_files("tests/test_metautils.cpp")
+
+target("test_container")
+    set_kind("binary")
+    add_deps("auxtypes")
+    add_files("tests/test_container.cpp")
+
+target("test_result")
+    set_kind("binary")
+    add_deps("auxtypes")
+    add_files("tests/test_result.cpp")
+
+target("test_minor_helpers")
+    set_kind("binary")
+    add_deps("auxtypes")
+    add_files("tests/test_minor_helpers.cpp")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

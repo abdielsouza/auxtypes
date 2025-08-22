@@ -8,5 +8,6 @@
 #include "result.hpp"
 #include "container.hpp"
 #include "metautils.hpp"
+#include "minor_helpers.hpp"
 
 #endif /* CBA23359_D1BC_4D39_BF10_74DF13DD37DB */
