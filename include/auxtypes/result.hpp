@@ -14,11 +14,9 @@ namespace auxtypes
     template <typename T>
     class ResultCaseValue
     {
+    public:
         T value;
 
-        friend class Result;
-
-    public:
         constexpr explicit ResultCaseValue(T value) : value(std::move(value)) {}
 
         constexpr T&& take()
@@ -55,32 +53,32 @@ namespace auxtypes
         constexpr Result(Ok<OkT> value) : variant(std::move(value)) {}
         constexpr Result(Err<ErrT> value) : variant(std::move(value)) {}
 
-        constexpr bool isOk() const
+        constexpr bool isOk()
         {
             return std::holds_alternative<Ok<OkT>>(variant);
         }
 
-        constexpr bool isErr() const
+        constexpr bool isErr()
         {
             return std::holds_alternative<Err<ErrT>>(variant);
         }
 
-        constexpr OkT getOk() const
+        constexpr OkT getOk()
         {
             return std::get<Ok<OkT>>(variant).value;
         }
 
-        constexpr ErrT getErr() const
+        constexpr ErrT getErr()
         {
             return std::get<Err<ErrT>>(variant).value;
         }
 
-        constexpr OkT takeOk() const
+        constexpr OkT takeOk()
         {
             return std::get<Ok<OkT>>(variant).take();
         }
 
-        constexpr ErrT takeErr() const
+        constexpr ErrT takeErr()
         {
             return std::get<Err<ErrT>>(variant).take();
         }
