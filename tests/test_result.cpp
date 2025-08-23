@@ -5,12 +5,13 @@
 
 int main()
 {
-    auto accept_even = [](int number) -> auxtypes::Result<int, std::string> {
+    auto accept_even = [](int number)
+    -> auxtypes::Result<int, const char*> {
         if (!(number % 2 == 0)) {
-            return auxtypes::Err<std::string>("number is not even!");
+            return auxtypes::Err("number is not even!");
         }
 
-        return auxtypes::Ok<int>(number);
+        return auxtypes::Ok(number);
     };
 
     auto expect_ok = accept_even(2);

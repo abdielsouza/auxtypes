@@ -30,14 +30,25 @@ namespace auxtypes
      * @warning Internal use!
      */
     template <typename T>
-    using Ok = ResultCaseValue<T>;
+    class Ok : public ResultCaseValue<T>
+    {
+    public:
+        using ResultCaseValue<T>::ResultCaseValue;
+    };
 
     /**
      * Represents a returned type by Result in case of failure.
      * @warning Internal use!
      */
     template <typename T>
-    using Err = ResultCaseValue<T>;
+    class Err : public ResultCaseValue<T>
+    {
+    public:
+        using ResultCaseValue<T>::ResultCaseValue;
+    };
+
+    template <typename T> Ok(T) -> Ok<T>;
+    template <typename E> Err(E) -> Err<E>;
 
     /**
      * Represents any action result. If the action is successful,
