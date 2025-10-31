@@ -26,26 +26,30 @@ package("auxtypes")
         os.vrun("make install -j4")
     end)
 
-    rule("test")
-        set_extensions(".cpp") -- Associate the rule with `.txt` files
-        on_build(function (target)
-            print("Building target: " .. target:name())
-        end)
-        on_run(function (target)
-            print("Running tests for target: " .. target:name())
-        end)
+package_end()
 
-    target("auxtypes")
-        set_kind("headeronly")
-        set_languages("c99", "cxx17")
-        add_includedirs("include", {public=true})
+add_rules("mode.debug", "mode.release")
 
-    target("tests")
-        set_kind("binary")
-        add_deps("auxtypes")
-        add_files("tests/*.cpp")
-        set_group("test") -- organiza no grupo de testes
-        add_rules("test") -- habilita execução via `xmake test`
+rule("test")
+    set_extensions(".cpp") -- Associate the rule with `.txt` files
+    on_build(function (target)
+        print("Building target: " .. target:name())
+    end)
+    on_run(function (target)
+        print("Running tests for target: " .. target:name())
+    end)
+
+target("auxtypes")
+    set_kind("headeronly")
+    set_languages("c99", "cxx17")
+    add_includedirs("include", {public=true})
+
+target("tests")
+    set_kind("binary")
+    add_deps("auxtypes")
+    add_files("tests/*.cpp")
+    set_group("test") -- organiza no grupo de testes
+    add_rules("test") -- habilita execução via `xmake test`
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
