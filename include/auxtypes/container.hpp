@@ -34,7 +34,7 @@ namespace auxtypes
             for (auto&& e : init) pushBack(e);
         }
 
-        void pushBack(const T&)
+        void pushBack(const T& value)
         {
             if (!using_heap && count < N)
             {

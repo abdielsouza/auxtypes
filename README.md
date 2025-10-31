@@ -26,10 +26,12 @@ Ela busca oferecer **segurança, clareza e performance**, complementando a STL c
 ## 🚀 Exemplo de uso
 ```cpp
 #include <iostream>
-#include "metautils.hpp"
-#include "containers.hpp"
+#include "auxtypes/metautils.hpp"
+#include "auxtypes/containers.hpp"
 
 int main() {
+    using namespace auxtypes;
+
     SmallVector<int, 4> vec = {1,2,3};
     vec.push_back(4);
     vec.push_back(5);
@@ -43,3 +45,4 @@ int main() {
     smap.insert(2, "dois");
     std::cout << "1 -> " << smap.at(1) << "\n";
 }
+```
