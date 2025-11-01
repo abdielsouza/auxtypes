@@ -34,7 +34,6 @@ namespace auxtypes
         // Operadores de comparação (C++20)
         #if __cplusplus >= 202002L
         constexpr auto operator<=>(const StrongType&) const = default;
-        #endif
 
         // Operadores aritméticos opcionais
         constexpr StrongType operator+(const StrongType& other) const requires std::is_arithmetic_v<T>
@@ -58,6 +57,38 @@ namespace auxtypes
             value -= other.value;
             return *this;
         }
+        #else
+        // Operadores aritméticos opcionais
+        constexpr StrongType operator+(const StrongType& other) const
+        {
+            static_assert(std::is_arithmetic_v<T>);
+
+            return StrongType(value + other.value);
+        }
+
+        constexpr StrongType operator-(const StrongType& other) const
+        {
+            static_assert(std::is_arithmetic_v<T>);
+            
+            return StrongType(value - other.value);
+        }
+
+        constexpr StrongType& operator+=(const StrongType& other)
+        {
+            static_assert(std::is_arithmetic_v<T>);
+
+            value += other.value;
+            return *this;
+        }
+
+        constexpr StrongType& operator-=(const StrongType& other)
+        {
+            static_assert(std::is_arithmetic_v<T>);
+
+            value -= other.value;
+            return *this;
+        }
+        #endif
 
         // Operador de streaming (para debug/log)
         friend std::ostream& operator<<(std::ostream& os, const StrongType& s)
